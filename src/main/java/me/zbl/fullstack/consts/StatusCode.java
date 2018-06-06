@@ -36,4 +36,8 @@ public class StatusCode {
    * 服务器异常
    */
   public static final int SERVER_EXCEPTION = 502;
+  /**
+   * 未登录
+   */
+  public static final int NO_USER = 601;
 }

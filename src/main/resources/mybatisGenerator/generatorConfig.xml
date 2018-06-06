@@ -39,7 +39,7 @@
         </javaClientGenerator>
 
         <!-- sql占位符，表示所有的表 -->
-        <table tableName="%">
+        <table tableName="comments">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
         <!--<table tableName="%">
