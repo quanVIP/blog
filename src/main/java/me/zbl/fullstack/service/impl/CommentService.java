@@ -1,5 +1,7 @@
 package me.zbl.fullstack.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,12 +32,16 @@ public class CommentService extends BaseViewTransableService<Article, PostView> 
   CommentsMapper mCommentsMapper;
 
 @Override
-public void addComment(Integer user_id,Integer article_id, String content) {
+public void addComment(User user,Integer article_id, String content ,Integer commentId) {
     Comments comments = new Comments();
     comments.setArticleId(article_id);
-    comments.setUserId(user_id);
+    comments.setUserId(user.getId());
+    comments.setUserName(user.getNickname());
     comments.setComment(content);
-    comments.setCreateTime(new Date());
+    comments.setCommentId(commentId);
+    SimpleDateFormat sdf =   new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" ); 
+    String date = sdf.format(new Date()); 
+    comments.setCreateTime(date);
     mCommentsMapper.insertSelective(comments);
   }
 
@@ -47,8 +53,24 @@ protected List<PostView> transEntityToView(List<Article> entityList) {
 
 @Override
 public List<Comments> getCommentList(Integer article_id,Integer pageNum) {
-	List<Comments> commentList = mCommentsMapper.getCommentList(article_id,(pageNum-1)*10,pageNum*10);
+	List<Comments> commentList = mCommentsMapper.getCommentList(article_id,(pageNum-1)*5,5);
 	return commentList;
+}
+
+@Override
+public int getCount(Integer article_id) {
+	int count = mCommentsMapper.getCount(article_id);
+	return count;
+}
+
+@Override
+public List<Comments> getReplyList(Integer article_id, List<Comments> commentList) {
+	int ids[] = new  int[5];
+	for(int i=0;i<commentList.size();i++){
+		ids[i]=commentList.get(i).getId();
+	}
+	List<Comments> replyList = mCommentsMapper.getReplyList(article_id, ids);
+	return replyList;
 }
 }
 

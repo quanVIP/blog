@@ -18,15 +18,18 @@ public class Comments {
     private Integer userId;
 
     @Column(name = "create_time")
-    private Date createTime;
+    private String createTime;
 
     @Column(name = "comment_id")
     private Integer commentId;
 
+    @Column(name = "user_name")
+    private String userName;
+
     private String comment;
 
     /**
-     * »ñÈ¡PrimaryKey
+     * ï¿½ï¿½È¡PrimaryKey
      *
      * @return id - PrimaryKey
      */
@@ -35,7 +38,7 @@ public class Comments {
     }
 
     /**
-     * ÉèÖÃPrimaryKey
+     * ï¿½ï¿½ï¿½ï¿½PrimaryKey
      *
      * @param id PrimaryKey
      */
@@ -74,14 +77,14 @@ public class Comments {
     /**
      * @return create_time
      */
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
     /**
      * @param createTime
      */
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
@@ -97,6 +100,20 @@ public class Comments {
      */
     public void setCommentId(Integer commentId) {
         this.commentId = commentId;
+    }
+
+    /**
+     * @return user_name
+     */
+    public String getUserName() {
+        return userName;
+    }
+
+    /**
+     * @param userName
+     */
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
     }
 
     /**

@@ -1,23 +1,30 @@
 package me.zbl.fullstack.controller;
 
+import static me.zbl.fullstack.consts.ViewConsts.VIEW_ARTICLE;
+import static me.zbl.fullstack.consts.ViewConsts.VIEW_POSTLIST;
+import static me.zbl.fullstack.consts.ViewConsts.VIEW_TAGLIST;
+import static me.zbl.fullstack.consts.ViewConsts.VIEW_TITLE;
+import static me.zbl.fullstack.consts.ViewConsts.VIEW_COMMENTS;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import me.zbl.fullstack.controller.base.BaseController;
 import me.zbl.fullstack.entity.Article;
+import me.zbl.fullstack.entity.Comments;
+import me.zbl.fullstack.entity.dto.form.ArticleSearchForm;
 import me.zbl.fullstack.entity.vo.PostView;
 import me.zbl.fullstack.entity.vo.TagView;
-import me.zbl.fullstack.entity.dto.form.ArticleSearchForm;
 import me.zbl.fullstack.service.api.IAdminBlogService;
+import me.zbl.fullstack.service.api.ICommentService;
 import me.zbl.fullstack.service.api.IPostsService;
 import me.zbl.fullstack.service.api.ITagService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-
-import static me.zbl.fullstack.consts.ViewConsts.*;
 
 /**
  * 博客控制器
@@ -35,6 +42,9 @@ public class PostContoller extends BaseController {
 
   @Autowired
   private IAdminBlogService mBlogService;
+  
+  @Autowired
+  private ICommentService mComment;
 
   /**
    * 博客列表页
@@ -67,6 +77,8 @@ public class PostContoller extends BaseController {
     PostView postView = new PostView(article);
     addModelAtt(model, VIEW_ARTICLE, postView);
     addModelAtt(model, VIEW_TITLE, article.getTitle());
+//    List<Comments> commentList = mComment.getCommentList(article.getId(),1);
+//    addModelAtt(model, VIEW_COMMENTS, commentList);
     return "article";
   }
 

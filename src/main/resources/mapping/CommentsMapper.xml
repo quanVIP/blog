@@ -10,6 +10,7 @@
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="create_time" jdbcType="DATE" property="createTime" />
     <result column="comment_id" jdbcType="INTEGER" property="commentId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="comment" jdbcType="LONGVARCHAR" property="comment" />
   </resultMap>
 </mapper>

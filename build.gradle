@@ -132,6 +132,9 @@ dependencies {
 
     //fast-json
     compile("com.alibaba:fastjson:$fastJsonVersion")
+    
+    //分页
+    compile group: 'com.github.pagehelper', name: 'pagehelper', version: '4.1.0'
 
 }
 

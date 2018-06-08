@@ -13,6 +13,7 @@ public class ViewConsts {
   public static final String VIEW_POSTLIST = "postlist";
   public static final String VIEW_TAGLIST = "taglist";
   public static final String VIEW_ARTICLE = "article";
+  public static final String VIEW_COMMENTS = "comments";
 
   public static final String VIEW_ARTICLE_MD = "article_md";
 }

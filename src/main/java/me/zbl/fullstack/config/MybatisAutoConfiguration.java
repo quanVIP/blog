@@ -1,6 +1,9 @@
 package me.zbl.fullstack.config;
 
-import com.zaxxer.hikari.HikariDataSource;
+import java.util.Properties;
+
+import javax.annotation.PostConstruct;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.ibatis.plugin.Interceptor;
@@ -21,7 +24,8 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.PostConstruct;
+import com.github.pagehelper.PageHelper;
+import com.zaxxer.hikari.HikariDataSource;
 
 
 /**
@@ -88,24 +92,19 @@ public class MybatisAutoConfiguration {
                 this.properties.getExecutorType());
     }
 
-//    /**
-//     * 分页插件
-//     *
-//     * @param dataSource
-//     * @return
-//     * @author SHANHY
-//     * @create  2016年2月18日
-//     */
-//    @Bean
-//    public PageHelper pageHelper(DataSource dataSource) {
-//        log.info("注册MyBatis分页插件PageHelper");
-//        PageHelper pageHelper = new PageHelper();
-//        Properties p = new Properties();
-//        p.setProperty("offsetAsPageNum", "true");
-//        p.setProperty("rowBoundsWithCount", "true");
-//        p.setProperty("reasonable", "true");
-//        pageHelper.setProperties(p);
-//        return pageHelper;
-//    }
+    /**
+     * 分页插件
+     */
+    @Bean  
+    public PageHelper pageHelper() {  
+        System.out.println("=========MyBatisConfiguration.pageHelper()");  
+        PageHelper pageHelper = new PageHelper();  
+        Properties p = new Properties();  
+        p.setProperty("offsetAsPageNum", "true");  
+        p.setProperty("rowBoundsWithCount", "true");  
+        p.setProperty("reasonable", "true");  
+        pageHelper.setProperties(p);  
+        return pageHelper;  
+    }  
 
 }
