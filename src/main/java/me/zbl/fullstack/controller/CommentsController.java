@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import freemarker.template.Configuration;
 import me.zbl.fullstack.consts.SessionConstants;
 import me.zbl.fullstack.controller.base.BaseController;
 import me.zbl.fullstack.entity.Comments;
@@ -33,6 +34,9 @@ public class CommentsController extends BaseController {
 	
 	  @Autowired
 	  private ICommentService mComment;
+	  
+	  @Autowired
+	  private Configuration configuration;
 
 	  /**
 	   * 增加评论
@@ -64,7 +68,7 @@ public class CommentsController extends BaseController {
 		   result.put("count", count);
 		   List<Comments> replyList = mComment.getReplyList(article_id,commentList);
 		   result.put("replyList", replyList);
-		   String comments = FreemarkerUtils.analysisTemplate("comments.ftl", result);
+		   String comments = FreemarkerUtils.analysisTemplate(configuration,"comments.ftl", result);
 		   int pageCount = (count/5)+1;
 		   result.put("CurrentPage", pageNum);
 		   result.put("pageCount", pageCount);
